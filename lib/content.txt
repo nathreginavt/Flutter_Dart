@@ -96,3 +96,66 @@ final/const <name> = <value>; (also dinamic, but cant be changed, it will never 
     <type> <name>;
     <name> = <value>;  
     (not dinamic, only accepts a specific type of value)
+
+to display images on your application, you need to insert it in a folder (im using assets/image) and then write their names on pubspec.yaml (probably at line 62, it's specified with comments)
+
+Image.asset(<ImageFileName>) -> widget to display images, same value as a Text widget, need to be inside the home value of MaterialApp
+Image.asset(
+            'folder/name.png',
+            width: 200
+            ),
+
+To add multiple widgets on screen, you need to add Column() or Row() widgets after the child and wrap the elements into it
+Column() -> creates one column that occupies the entire available height but only the width required, main axis is the vertical axis
+Row()-> creates one row that occupiesthe entire availablewidth but only the height required, main axis is the horizontal axis
+
+You add the widgets to be displayed inside the children value of column/row
+Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min, //tell the column to occupies the minimun necessary
+            children: [ ...]
+          )
+)
+
+Buttons:
+ElevatedButton-> background color and slight shadow
+OutlinedButton -> no background color but a border
+TextButton -> only some pressable text
+
+They all automatically shows two parameter: onPressed (the action of the button, just like javascript) and child (to define the elements included inside the button, like when we include other tags inside a <button></button> on html) but you can also add more, ex: style 
+TextButton(
+      onPressed: rollDice, 
+      style: TextButton.styleFrom(
+        foregroundColor: Colors.white, 
+        textStyle: const TextStyle(fontSize: 28)
+      ),
+      child: const Text('Roll Dice'),
+) 
+
+SizedButton() -> used to create a space between two elements, you can define its height, width... alternative for a padding
+const SizedBox(height: 20),
+
+StatelessWidget vs StatefulWidget:
+Stateless -> just shows some values, nothing changes internally
+Stateful -> allows to change state inside them, has some data that changes internally over time, for example changing which image is displayed on screen. 
+  - doesnt need a build method
+  - normally uses two classes, the principal one and the state one (state one needs the build method)
+
+class <name> extends StatefulWidget{
+  const <name>({super.key});
+
+  @override
+  State<<name>> createState() {
+    return _<name>State();
+  } 
+}
+
+  //private class (defined by the underscore _)
+class _<name>State extends State<<name>>
+  
+  @override
+  Widget build(context){
+    return <widgets>;      
+  }
+
+  $name -> to show the value of some variable
