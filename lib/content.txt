@@ -1,0 +1,98 @@
+it all starts with one key instruction
+runApp(); -> a function provides by Flutter to make the app run, its main job is to show some interface on the screen, it is defined by the framework
+
+you must wrap this code into other functions, a custom one, bc a function can't be executed alone (like just 'runApp();' and nothing else)
+void main(){ runApp(); } 
+
+now the code it's not finding the definition of the runApp code, so you must import (on the start of the code) the package where its defined
+import 'package:flutter/material.dart';
+void main(){runApp();}
+
+the runApp function needs a widget paramenter about what its needed to be displayed, flutter it's all about widgets and widgets trees
+the first widget to be passed to runApp its the MaterialApp -> it ensures that the interface can be shown correctly on the screen, doing a lot of behind-the-scenes configurations
+runApp(MaterialApp());
+
+MaterialApp doesn't show anything on the screen, it expects another input value as parameter saying what its going to the displayed on the screen
+It has a lot of 'named arguments' -> it does not matter the order you define the arguent/parameter when calling the function, instead you need to name/call it to determines which parameter receives the value, they're optional when calling a function
+
+the main argument you'll use for MaterialApp is the 'home' -> it defines which kind of widget should be displayed inside of that app UI
+runApp(MaterialApp(home: [...] ));
+
+Text() -> widget to display a text, has one position String parameter (must be set) and a long list of named parameters (optional)
+runApp(MaterialApp(home: Text('HelloWorld')));
+
+its good to use const so you can reuse values on memory, it wont be created a new one (n sei explicar essa parte mas basically sempre que o vscode mandar usar const vc usa const)
+
+Scaffold widget -> helps with setting up a good looking screen in the app; must be wraped around the widgets that belong to a screeen; needs a body argument and then wrap Text() into them
+runApp(const MaterialApp(home: Scaffold(body: Text('Hello World!'))))
+
+To put the Text in the middle of the screen, it's used a Center widget, so you need to wrap Text into the child parameter of that widget (do it manually or simply refactorating using Crtl + Shift + R -> choose the 'wrap in Center' option)
+runApp(const MaterialApp(home: Scaffold(body: Center(child: Text('Hello World!')))));
+
+its good to format your code, so its easier to read and undertand your widget tree. vscode has a autoformating shortcut (i couldnt use idk why)
+
+Change background -> you need to use a parameter of Scaffold called BacgroundColor, it accepts only Color or Colors objects as values
+backgroundColor: Colors.deepPurple / backgroundColor: Color.fromARGB(a, r, g, b)
+all values are objects at the end, you have many objects working together to creat an app
+
+Container widget -> very useful for configuring styling and layout settings, wrap the Center/Text widgets inside it on the child parameter
+cant be used inside a const 
+body: Container( child: const Center( child: Text('Hello World!'),),),
+
+decoration parameter -> used for decorating all the children of the Container, asks for a Decoration object
+if you want a gradient background, you can use this specfic widgets/objects:
+
+body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Colors.deepPurple,
+              Colors.blueAccent,
+            ],
+            begin: Alignment.topLeft, where u want the gradient to being
+            end: Alignment.bottomRight, where u want it to end 
+          ), 
+        ),
+
+
+to style the Text widget, you need to add the named argument 'style' to it, after the String content, and then you can add others objects to define, for example, the font color, size and etc, all separated by comma(virgula)
+ Text(
+        'Hello World!', 
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 28,
+        ), 
+      ),
+ 
+
+Classes -> define objects; objects help organizing data (variables/properties) and separating logic (functions/methods), they're defined by the constructor method of a class
+  it's name must be started with an uppercase character, cannot have spaces, instead it's better to use _ or simply writing all words together 
+
+
+building custom widgets: storing combinations of other widgets and configurations to be used later or just simplyfing(?) the visual of the code
+ class <name> extends StatelessWidget {
+  
+  @override 
+  Widget build(context){
+    return <widgets to be returned>
+  }
+}
+
+
+statelesswidget -> adds a lot of logic and data to the class behind-the-scenes, in order to use that class as a widget
+build -> function/method expected by StatelessWidget, the '@override' indicates what it is. this method is gonna be executed for me by Flutter; once Flutter detects my widget it will call this build method
+
+it also must have a consructor method, with a named argument Key extended from the superclass
+ const GradientContainer({super.key}); -> the named argument is defined between {}
+defining the constructor as const you say that the widget can be called as const value
+
+you can also store combinations of widgets/codes on other files, defining the class there and importing to your main code
+import 'package:<project name> / <class name>.dart';
+
+you can define variables to store data and reutilize it anywhere you need
+
+var <name> = <value>; (thats dinamic, can be changed the value and doesnt have a specific type)
+final/const <name> = <value>; (also dinamic, but cant be changed, it will never receive a new value) - when using const, you tells dart that this can be used when the code is about to execute
+    <type> <name>;
+    <name> = <value>;  
+    (not dinamic, only accepts a specific type of value)
