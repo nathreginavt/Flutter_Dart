@@ -1,6 +1,4 @@
 # flutter_app
 
-A new Flutter project, learning how to use this framework.
-
-
+Random dice roller, inicial project for learninghow to use the Flutter framework.
 
